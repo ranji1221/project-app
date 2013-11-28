@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.model.system">
+	<select id="getUser" parameterType="Integer" resultType="User">
+		select * from tbl_user where id=#{id}
+	</select>
+	<select id="findAll" resultType="User">
+		select * from tbl_user
+	</select>
+	<select id="findByName" parameterType="String" resultType="User">
+		select * from tbl_user where uname=#{uname}
+	</select>
+	<insert id="addUser" parameterType="User">
+		insert into tbl_user(uname,pwd,enabled,description) values(#{uname},#{pwd},#{enabled},#{description})
+	</insert>
+	<update id="updateUser" parameterType="User">
+		update tbl_user set uname=#{uname},pwd=#{pwd},enabled=#{enabled},description=#{description} where id=#{id}
+	</update>
+	<delete id="deleteUser" parameterType="Integer">
+		delete from tbl_user where id=#{id}
+	</delete>
+</mapper>

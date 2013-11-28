@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>project-app</artifactId>
+		<groupId>com.company.project</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	
+	<artifactId>restlet</artifactId>
+	<packaging>war</packaging>
+	<name>restlet</name>
+	<url>http://maven.apache.org</url>
+	
+	<properties>
+		<restlet.jee.version>2.0.9</restlet.jee.version>
+	</properties>
+		
+	<dependencies>
+		<!-- Servlet API -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+		</dependency>
+		
+		<!-- 可选的依赖JSTL与STANDARD,因为主要是用Restlet实现web service,这里仅是为了测试的需要暂时引入 -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+		</dependency>
+		
+		<!-- 依赖Project-Service模块 -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
+		<!-- 依赖Restlet框架 -->
+		<dependency>
+			<groupId>org.restlet.jee</groupId>
+			<artifactId>org.restlet.ext.spring</artifactId>
+			<version>${restlet.jee.version}</version>
+			<!-- 排除传递性依赖有冲突的jar-->
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-asm</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.restlet.jee</groupId>
+			<artifactId>org.restlet.ext.jaxrs</artifactId>
+			<version>${restlet.jee.version}</version>
+		</dependency>
+		
+		<!-- 处理JSON的工具 -->
+		<dependency>
+          	<groupId>org.codehaus.jackson</groupId>
+          	<artifactId>jackson-core-asl</artifactId>
+          	<version>1.9.13</version>
+        </dependency>
+        <dependency>
+          	<groupId>org.codehaus.jackson</groupId>
+          	<artifactId>jackson-mapper-asl</artifactId>
+          	<version>1.9.13</version>
+        </dependency>
+        
+	</dependencies>
+	
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>7.1.0.RC1</version>
+				<configuration>
+					<scanIntervalSeconds>10</scanIntervalSeconds>
+					<webAppConfig>
+						<contextPath>/restlet</contextPath>
+					</webAppConfig>
+				</configuration>
+			</plugin>
+		</plugins>
+		<finalName>restlet</finalName>
+	</build>
+	
+	<!-- 加载Restlet框架的仓库 -->
+	<repositories>
+		<repository>
+			<id>maven-restlet</id>
+			<name>Public online Restlet repository</name>
+			<url>http://maven.restlet.org</url>
+		</repository>
+	</repositories>
+	
+</project>

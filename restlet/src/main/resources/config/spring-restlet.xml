@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context-3.2.xsd
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+	
+	<!-- Restlet框架的原理是一个Component可以包含多个Application,一个Application可以包含多个Resource -->
+	
+	<!-- 1. 配置Component -->
+	<bean id="component" class="org.restlet.ext.spring.SpringComponent">
+		<property name="defaultTarget" ref="application"/>
+	</bean>
+	
+	<!-- 2. 配置Application -->
+	<bean id="application" class="com.company.project.restlet.application.BaseApplication">
+		<property name="inboundRoot" ref="router"/>
+	</bean>
+	
+	<!-- 3. 自动路由，当然可以自己配置路由，但是我更加喜欢标注 -->
+	<bean id="router" class="org.restlet.ext.spring.SpringBeanRouter"/>
+	
+	<!-- 4. 自动装配Resource类 -->
+	<context:component-scan base-package="com.company.project.restlet" />
+	
+</beans>

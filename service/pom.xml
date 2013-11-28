@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.company.project</groupId>
+		<artifactId>project-app</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	
+	<artifactId>service</artifactId>
+	<name>service</name>
+	<url>http://maven.apache.org</url>
+
+	<dependencies>
+		
+		<!-- 依赖Project-Persist模块 -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>persist</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
+		<!-- 依赖JUnit测试框架 -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+	</dependencies>
+</project>
