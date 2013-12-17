@@ -1,17 +1,8 @@
 package com.company.project.service.system.prototype;
 
-import java.util.List;
 import com.company.project.model.system.User;
+import com.company.project.service.common.prototype.IGenericService;
 
-public interface IUserService {
-	public boolean addUser(User user);
-	public boolean updateUser(User user);
-	public User getUser(int id);
-	
-	public void save(User user);
-	public User findByName(String userName);
-	public User findById(int id);
-	public List<User> findAll();
-	public void update(User user);
-	public void delete(int id);
+public interface IUserService extends IGenericService<User>{
+	//-- 通用的业务方法已有，如有别的业务方法请自己编写
 }

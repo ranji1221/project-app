@@ -1,16 +1,15 @@
 package com.company.project.persist.system;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+
 import javax.annotation.Resource;
+
 import org.apache.log4j.PropertyConfigurator;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import com.company.project.model.system.User;
+
 import com.company.project.persist.system.prototype.IUserDao;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -28,29 +27,43 @@ public class UserDaoTest {
 
 	@Test
 	public void testAddUser() {
-
-		User u = new User("zhangsan", "123", (byte) 1, "test user.");
-
-		boolean isSuccess = false;
-		try {
-			isSuccess = userDao.addUser(u);
-			fail("add error,because the user already exists.");
-		} catch (Exception e) {
-			assertFalse(isSuccess);
-			return;
-		}
-		assertTrue(isSuccess);
+//		for(int i=1;i<=100;i++){
+//			User u = new User("lisi"+i, "123", (byte) 1, "test user.");
+//			userDao.save(u, User.class);
+//		}
+	}
+	@Test
+	public void testUpdateUser(){
+//		User u = userDao.findByID(93, User.class);
+//		u.setUname("lisi-update");
+//		userDao.update(u, User.class);
 	}
 	
 	@Test
-	public void updateUser(){
-		/*User u = userDao.getUser(29);
-		System.out.println(u.getUname());
-		System.out.println(u.getId());
-		u.setUname("jiran");
-		u.setEnabled((byte)0);
-		System.out.println(u.getUname());
-		
-		userDao.updateUser(u);*/
+	public void testDeleteUser(){
+		//userDao.deleteByID(90, User.class);
+		//userDao.deleteAll(User.class);
+	}
+	
+	@Test
+	public void testFindAllUsers(){
+//		List<User> users = userDao.findAll(User.class);
+//		for(User u : users){
+//			System.out.println(u.getUname());
+//		}
+	}
+	
+	@Test
+	public void testFindPaginated1(){
+//		SystemContext.setOffset(0);
+//		SystemContext.setPageSize(5);
+//		PagerModel<User> pm = userDao.findPaginated(User.class);
+//		System.out.println(pm.getTotal());
+//		for(User u : pm.getData()){
+//			System.out.println(u.getUname());
+//		}
 	}
 }
+
+
+

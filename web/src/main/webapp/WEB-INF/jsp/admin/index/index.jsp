@@ -15,8 +15,22 @@
     	<div data-options="region:'west'" title="Navigation" style="width:215px;">
     		<%@include file="../nav/left.jsp" %>
     	</div>
-    	<div data-options="region:'center',title:'Main Title'">
-    		<%@include file="../content/content.jsp" %>
+    	<div data-options="region:'center',title:'WorkSpace'" class="easyui-tabs" id="tt">
+    		<div title="Home"></div>
+    		<script>
+				function addTab(title, url){
+					if($('#tt').tabs('exists',title)){
+						$('#tt').tabs('select',title);
+					}else{
+						var content = '<iframe scrolling="auto" frameborder="0" src="'+url+'" style="width:100%;height:100%;"></iframe>';
+						$('#tt').tabs('add',{
+							title:title,
+							content:content,
+							closable:true
+						});
+					}
+				}
+			</script>
     	</div>
   </body>
 </html>

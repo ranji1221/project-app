@@ -1,6 +1,6 @@
 <div class="leftPanel" style="width:200px;height:auto;background:#7190E0;padding:5px;">
 	<div class="easyui-panel" title="Picture Tasks" collapsible="true" style="width:200px;height:auto;padding:10px;">
-		View as a slide show<br/>
+		<a href="javascript:void(0)" onclick="addTab('Users','${pageContext.request.contextPath}/user/list')">User Manager</a><br/>
 		Order prints online<br/>
 		Print pictures
 	</div>

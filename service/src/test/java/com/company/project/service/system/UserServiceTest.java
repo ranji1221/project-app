@@ -20,10 +20,11 @@ public class UserServiceTest {
 	
 	@Test
 	public void testGetUser(){
-		//User u = userService.getUser(17);
-		//assertNotNull(u);
 		
-		//assertEquals(u.getPwd(), "123");
+		User u = userService.findByID(94, User.class);
+		
+		if(u != null)
+			assertEquals("lisi1", u.getUname());
 	}
 	
 	@Test

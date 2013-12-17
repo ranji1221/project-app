@@ -27,14 +27,14 @@ public class JsonResource extends ServerResource{
 		
 		String userID = (String)getRequestAttributes().get("id");
 		
-		User u = userService.getUser(Integer.valueOf(userID));
+		User u = userService.findByID(Integer.valueOf(userID),User.class);
 		System.out.println(u);
 		
 		ObjectMapper om = new ObjectMapper();
 		
 		String value = "";
 		try {
-			//-- ¼ÓÈëwriteWithDefaultPrettyPrinter()·½·¨½ö½öÊÇÎªÁË¸ü¼ÓµÄ¸ñÊ½»¯
+			//-- ï¿½ï¿½ï¿½ï¿½writeWithDefaultPrettyPrinter()ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Ë¸ï¿½ÓµÄ¸ï¿½Ê½ï¿½ï¿½
 			value = om.writerWithDefaultPrettyPrinter().writeValueAsString(u);
 			
 		} catch (JsonGenerationException e) {
