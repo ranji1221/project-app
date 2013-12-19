@@ -3,7 +3,11 @@ package com.company.project.controller.system;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +33,7 @@ public class UserController {
 	@RequestMapping(value="/list",method=RequestMethod.GET)
 	public ModelAndView list(){
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/userui/list");
+		mv.setViewName("/user/list");
 		return mv;
 	}
 	
@@ -76,16 +80,30 @@ public class UserController {
 	
 	@RequestMapping(value="/getusers",method=RequestMethod.POST)
 	@ResponseBody
-	public String getUsers(){
-		PagerModel<User> pm = userService.findPaginated(User.class);
-		
+	public String getUsers(HttpServletRequest request){
 		//-- 转换Objects Data 到 Json Data
 		ObjectMapper om = new ObjectMapper();
-		Map<String,Object> map = new HashMap<String,Object>();
 		
+		//-- 1. 从request对象中获取params JSON对象
+		String paramsJSONStr = request.getParameter("params");
+		//-- 2. 利用JSON工具把paramsJSONStr转换为paramsVO值对象
+		User paramsVO = null;
+		try {
+			paramsVO = om.readValue(paramsJSONStr, User.class);
+		} catch (JsonParseException e1) {
+			e1.printStackTrace();
+		} catch (JsonMappingException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		//-- 3. 查询参数条件传入业务方法，产生正确的结果
+		PagerModel<User> pm = userService.findPaginated(paramsVO,User.class);
+		
+		//-- 4. 把结果数据转变为JSON串传输给页面
+		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("total", pm.getTotal());
 		map.put("rows", pm.getData());
-		
 		String jsonData = "";
 		try {
 			jsonData = om.writerWithDefaultPrettyPrinter().writeValueAsString(map);

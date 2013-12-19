@@ -11,11 +11,11 @@ public class User implements Serializable{
 	private int id;
 	private String uname;
 	private String pwd;
-	private byte enabled;
+	private int enabled;
 	private String description;
 	
 	public User(){}
-	public User(String uname, String pwd, byte enabled, String description) {
+	public User(String uname, String pwd, int enabled, String description) {
 		super();
 		this.uname = uname;
 		this.pwd = pwd;
@@ -40,10 +40,11 @@ public class User implements Serializable{
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	public byte getEnabled() {
+	
+	public int getEnabled() {
 		return enabled;
 	}
-	public void setEnabled(byte enabled) {
+	public void setEnabled(int enabled) {
 		this.enabled = enabled;
 	}
 	public String getDescription() {

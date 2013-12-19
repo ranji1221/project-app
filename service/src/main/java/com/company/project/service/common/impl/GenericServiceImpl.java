@@ -45,8 +45,8 @@ public class GenericServiceImpl<T> implements IGenericService<T> {
 	}
 
 	@Override
-	public PagerModel<T> findPaginated(Class<T> typeObject) {
-		return dao.findPaginated(typeObject);
+	public PagerModel<T> findPaginated(T paramsValueObject, Class<T> typeObject) {
+		return dao.findPaginated(paramsValueObject,typeObject);
 	}
 
 	@Override

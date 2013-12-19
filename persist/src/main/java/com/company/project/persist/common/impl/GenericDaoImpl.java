@@ -64,11 +64,6 @@ public  class GenericDaoImpl<T> implements IGenericDao<T> {
 	}
 
 	@Override
-	public PagerModel<T> findPaginated(Class<T> typeObject) {
-		return findPaginated(null, ".findPaginated"+typeObject.getSimpleName()+"s", ".getNumberOf"+typeObject.getSimpleName()+"Items",typeObject);
-	}
-
-	@Override
 	public PagerModel<T> findPaginated(Map<String, Object> params,String methodName, String methodNameForNumOfItems, Class<T> typeObject) {
 		//-- 1.不管传或不传参数都会追加至少两个分页参数
 		if(params==null || params.size()==0) 
@@ -81,6 +76,7 @@ public  class GenericDaoImpl<T> implements IGenericDao<T> {
 		
 		int total = getNumberOfItems(typeObject.getPackage().getName()+methodNameForNumOfItems,params);
 		List<T> entitys = s.selectList(typeObject.getPackage().getName()+methodName,params);
+		
 	
 		pm.setTotal(total);
 		pm.setData(entitys);
@@ -97,4 +93,13 @@ public  class GenericDaoImpl<T> implements IGenericDao<T> {
 		s.close();
 		return count;
 	}
+
+	@Override
+	public PagerModel<T> findPaginated(T paramsValueObject, Class<T> typeObject) {
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("pvo", paramsValueObject);
+		return findPaginated(params, ".findPaginated"+typeObject.getSimpleName()+"s", ".getNumberOf"+typeObject.getSimpleName()+"Items",typeObject);
+	}
+	
+	
 }

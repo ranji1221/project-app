@@ -21,6 +21,6 @@ public interface IGenericService<T> {
 	public List<T> findAll(Class<T> typeObject);
 	
 	//-- 2. 分页查询方法
-	public PagerModel<T> findPaginated(Class<T> typeObject);
+	public PagerModel<T> findPaginated(T paramsValueObject, Class<T> typeObject);
 	public PagerModel<T> findPaginated(Map<String,Object> params, String methodName, String methodNameForNumOfItems,Class<T> typeObject);
 }
